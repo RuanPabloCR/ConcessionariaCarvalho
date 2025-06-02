@@ -11,7 +11,7 @@ out/
 
 # VS Code
 .vscode/
-
+.vs/
 # Rider
 .idea/
 *.sln.iml
