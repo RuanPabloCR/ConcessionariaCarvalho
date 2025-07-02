@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
     public class Guest : User
     {
         public string Phone { get; set; }
         public string Cpf { get; set; }
         public override List<String> Roles { get; } = new List<string> { "guest" };
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
     }
 }

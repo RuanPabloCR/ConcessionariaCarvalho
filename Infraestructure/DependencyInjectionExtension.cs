@@ -1,14 +1,15 @@
 ﻿using Infraestructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-
+using Application.RepositoriesInterface;
+using Infraestructure.Repositories;
 namespace Infraestructure
 {
     public static class DependencyInjectionExtension
     {
         public static void AddInfrastructure(this IServiceCollection services)
-        {
+        {   services.AddScoped<IRegisterGuestRepository, RegisterGuestRepository>();
+            services.AddScoped<IDeleteGuestRepository, DeleteGuestRepository>();
             AddDbContext(services);
         }
         private static void AddDbContext(IServiceCollection services)

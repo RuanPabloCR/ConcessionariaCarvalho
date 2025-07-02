@@ -8,10 +8,10 @@ namespace Domain.Entities
 {
     public class Sale
     {
-        public long Id { get; set; }
-        public long CarId { get; set; }
-        public long GuestId { get; set; }
-        public long SalesPersonId { get; set; }
+        public Guid Id { get; set; }
+        public Guid CarId { get; set; }
+        public Guid GuestId { get; set; }
+        public Guid SalesPersonId { get; set; }
         public decimal Price { get; set; }
         public DateTime Date { get; set; }
     }

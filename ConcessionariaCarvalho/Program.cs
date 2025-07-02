@@ -12,12 +12,14 @@ namespace ConcessionariaCarvalho
             var builder = WebApplication.CreateBuilder(args);
 
             // Configuração do JWT Authentication
+
             var key = Encoding.ASCII.GetBytes(Infraestructure.JWT.Settings.SecretKey);
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
+
             .AddJwtBearer(options =>
             {
                 options.RequireHttpsMetadata = false;
@@ -35,20 +37,14 @@ namespace ConcessionariaCarvalho
             builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("SalesPersonPolicy", policy => policy.RequireRole("SalesPerson"));
                 options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
-                // Adicione outras policies conforme necessário
+                
             });
 
             // Adicionando a camada de Infraestrutura
             builder.Services.AddInfrastructure();
-            /*builder.Services.AddAuthentication("Bearer")
-                .AddJwtBearer("Bearer", options =>
-                {
-                    options.Authority = "https://localhost:5001/";
-                    options.RequireHttpsMetadata = false;
-                    options.Audience = "api1";
-                });
-            */
+            
             builder.Services.AddControllers();
            
             builder.Services.AddEndpointsApiExplorer();

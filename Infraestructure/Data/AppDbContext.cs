@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Domain.Entities;
 namespace Infraestructure.Data
 {
     public class AppDbContext : DbContext
@@ -12,10 +7,10 @@ namespace Infraestructure.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-        public DbSet<Domain.Entities.Car> Cars { get; set; }
-        public DbSet<Domain.Entities.Guest> Guests { get; set; }
-        public DbSet<Domain.Entities.SalesPerson> SalesPeople { get; set; }
-        public DbSet<Domain.Entities.Sale> SalesProducts { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Guest> Guests { get; set; }
+        public DbSet<SalesPerson> SalesPeople { get; set; }
+        public DbSet<Sale> SalesProducts { get; set; }
         
     }
 }

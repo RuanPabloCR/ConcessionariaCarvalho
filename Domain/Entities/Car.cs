@@ -11,7 +11,7 @@ namespace Domain.Entities
     public class Car
     {
         
-        public long Id { get; set; }
+        public Guid Id { get; set; }
        
         public string Model { get; set; }= string.Empty;
        

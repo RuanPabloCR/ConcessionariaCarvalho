@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UseCase\CarUseCase\RegisterCar\" />
-    <Folder Include="UseCase\GuestUseCase\RegisterGuest\" />
     <Folder Include="UseCase\SalesPersonUseCase\RegisterSalesPerson\" />
     <Folder Include="Services\Validations\" />
   </ItemGroup>
