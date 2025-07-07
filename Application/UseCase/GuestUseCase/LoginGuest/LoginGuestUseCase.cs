@@ -7,11 +7,11 @@ using Application.RepositoriesInterface;
 
 namespace Application.UseCase.GuestUseCase.LoginGuest
 {
-    public class LoginGuestUseCase : ILoginGuestUseCase
+    public class LoginSalesPersonUseCase : ILoginGuestUseCase
     {
         private readonly IRegisterGuestRepository _repository;
 
-        public LoginGuestUseCase(IRegisterGuestRepository repository)
+        public LoginSalesPersonUseCase(IRegisterGuestRepository repository)
         {
             _repository = repository;
         }

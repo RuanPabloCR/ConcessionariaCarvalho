@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Communication.Guests
 {
-    public class GuestResponseWToken : GuestsResponse
+    public class SalesPersonResponseWToken : GuestsResponse
     {
         public String Token { get; set; }
     }

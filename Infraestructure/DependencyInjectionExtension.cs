@@ -10,6 +10,9 @@ namespace Infraestructure
         public static void AddInfrastructure(this IServiceCollection services)
         {   services.AddScoped<IRegisterGuestRepository, RegisterGuestRepository>();
             services.AddScoped<IDeleteGuestRepository, DeleteGuestRepository>();
+            services.AddScoped<ICreateCarRepository, CreateCarRepository>();
+            services.AddScoped<IUpdateCarRepository, UpdateCarRepository>();
+            services.AddScoped<IRegisterSalesPersonRepository, RegisterSalesPersonRepository>();
             AddDbContext(services);
         }
         private static void AddDbContext(IServiceCollection services)

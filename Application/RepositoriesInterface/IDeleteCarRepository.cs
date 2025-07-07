@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Entities;
+
 namespace Application.RepositoriesInterface
 {
-    public interface IUpdateCarRepository
+    public interface IDeleteCarRepository
     {
-        Task<bool> UpdateCarAsync(Guid id, Car car);
-        Task<Car?> GetCarByIdAsync(Guid id);
+        Task DeleteCarAsync(Guid id);
     }
 }

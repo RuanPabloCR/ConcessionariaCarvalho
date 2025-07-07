@@ -29,7 +29,7 @@ namespace ConcessionariaCarvalho.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<GuestResponseWToken>> Register([FromBody] GuestsRequest request)
+        public async Task<ActionResult<SalesPersonResponseWToken>> Register([FromBody] GuestsRequest request)
         {
             var guest = await _registerGuestUseCase.RegisterUserAsync(request);
             if (guest == null)
@@ -37,7 +37,7 @@ namespace ConcessionariaCarvalho.Controllers
 
             var token = _tokenService.Generate(guest);
 
-            var response = new GuestResponseWToken
+            var response = new SalesPersonResponseWToken
             {
                 Name = guest.Name,
                 Email = guest.Email,
@@ -49,7 +49,7 @@ namespace ConcessionariaCarvalho.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<GuestResponseWToken>> Login([FromBody] GuestLoginRequest request)
+        public async Task<ActionResult<SalesPersonResponseWToken>> Login([FromBody] GuestLoginRequest request)
         {
             var guest = await _loginGuestUseCase.LoginAsync(request);
             if (guest == null)
@@ -57,7 +57,7 @@ namespace ConcessionariaCarvalho.Controllers
 
             var token = _tokenService.Generate(guest);
 
-            var response = new GuestResponseWToken
+            var response = new SalesPersonResponseWToken
             {
                 Name = guest.Name,
                 Email = guest.Email,
