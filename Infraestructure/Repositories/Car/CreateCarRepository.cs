@@ -2,7 +2,7 @@
 using Domain.Entities;
 using Infraestructure.Data;
 
-namespace Infraestructure.Repositories
+namespace Infraestructure.Repositories.Car
 {
     public class CreateCarRepository : ICreateCarRepository
     {
@@ -11,7 +11,7 @@ namespace Infraestructure.Repositories
         {
             _context = context;
         }
-        public async Task RegisterCarAsync(Car car)
+        public async Task RegisterCarAsync(Domain.Entities.Car car)
         {
             _context.Cars.Add(car);
             await _context.SaveChangesAsync();

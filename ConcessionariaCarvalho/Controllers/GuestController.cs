@@ -28,8 +28,8 @@ namespace ConcessionariaCarvalho.Controllers
             _tokenService = tokenService;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<SalesPersonResponseWToken>> Register([FromBody] GuestsRequest request)
+        [HttpPost("register")]
+        public async Task<ActionResult<SalesPersonWToken>> Register([FromBody] GuestsRequest request)
         {
             var guest = await _registerGuestUseCase.RegisterUserAsync(request);
             if (guest == null)
@@ -37,7 +37,7 @@ namespace ConcessionariaCarvalho.Controllers
 
             var token = _tokenService.Generate(guest);
 
-            var response = new SalesPersonResponseWToken
+            var response = new SalesPersonWToken
             {
                 Name = guest.Name,
                 Email = guest.Email,
@@ -49,7 +49,7 @@ namespace ConcessionariaCarvalho.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<SalesPersonResponseWToken>> Login([FromBody] GuestLoginRequest request)
+        public async Task<ActionResult<SalesPersonWToken>> Login([FromBody] GuestLoginRequest request)
         {
             var guest = await _loginGuestUseCase.LoginAsync(request);
             if (guest == null)
@@ -57,7 +57,7 @@ namespace ConcessionariaCarvalho.Controllers
 
             var token = _tokenService.Generate(guest);
 
-            var response = new SalesPersonResponseWToken
+            var response = new SalesPersonWToken
             {
                 Name = guest.Name,
                 Email = guest.Email,
@@ -69,7 +69,7 @@ namespace ConcessionariaCarvalho.Controllers
         }
         // método pra deletar um usuario, so pra admins
         [HttpDelete("{guestId}")]
-        [Authorize("Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteGuest(Guid guestId,
             [FromServices] IDeleteGuestRepository deleteGuestRepository)
         {

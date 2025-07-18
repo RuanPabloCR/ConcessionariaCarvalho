@@ -1,26 +1,49 @@
-﻿using Infraestructure.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Application.RepositoriesInterface;
+﻿using Application.RepositoriesInterface;
+using Application.UseCase.GuestUseCase.LoginGuest;
+using Application.UseCase.GuestUseCase.RegisterGuest;
+using Application.UseCase.SalesPersonUseCase.DeleteSalesPerson;
+using Application.UseCase.SalesPersonUseCase.LoginSalesPerson;
+using Application.UseCase.SalesPersonUseCase.RegisterSalesPerson;
+using Application.Validators;
+using FluentValidation;
+using Infraestructure.Data;
 using Infraestructure.Repositories;
+using Infraestructure.Repositories.Car;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 namespace Infraestructure
 {
     public static class DependencyInjectionExtension
     {
-        public static void AddInfrastructure(this IServiceCollection services)
-        {   services.AddScoped<IRegisterGuestRepository, RegisterGuestRepository>();
+        public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        {
+            AddDbContext(services, configuration);
+            services.AddScoped<IRegisterGuestRepository, RegisterGuestRepository>();
             services.AddScoped<IDeleteGuestRepository, DeleteGuestRepository>();
             services.AddScoped<ICreateCarRepository, CreateCarRepository>();
             services.AddScoped<IUpdateCarRepository, UpdateCarRepository>();
             services.AddScoped<IRegisterSalesPersonRepository, RegisterSalesPersonRepository>();
-            AddDbContext(services);
+            services.AddScoped<IDeleteSalesPersonRepository, DeleteSalesPersonRepository>();
+
+            services.AddValidatorsFromAssemblyContaining<GuestValidator>();
+            services.AddValidatorsFromAssemblyContaining<SalesPersonRequestValidator>();
         }
-        private static void AddDbContext(IServiceCollection services)
+
+        public static void AddApplication(this IServiceCollection services)
+        {
+            services.AddScoped<IRegisterGuestUseCase, RegisterGuestUseCase>();
+            services.AddScoped<ILoginGuestUseCase, LoginGuestUseCase>();
+            services.AddScoped<IRegisterSalesPersonUseCase, RegisterSalesPersonUseCase>();
+            services.AddScoped<ILoginSalesPersonUseCase, LoginSalesPersonUseCase>();
+            services.AddScoped<IDeleteSalesPersonUseCase, DeleteSalesPersonUseCase>();
+        }
+
+        private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseMySql("Server=localhost;Database=ConcessionariaCarvalho;User=root;Password=123456",
-                    new MySqlServerVersion(new Version(8, 0, 25)));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
         }
     }

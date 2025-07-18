@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infraestructure.Repositories
+namespace Infraestructure.Repositories.Car
 {
     public class DeleteCarRepository : IDeleteCarRepository
     {

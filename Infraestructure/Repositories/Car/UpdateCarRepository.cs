@@ -1,7 +1,7 @@
 ﻿using Application.RepositoriesInterface;
 using Infraestructure.Data;
 using Domain.Entities;
-namespace Infraestructure.Repositories
+namespace Infraestructure.Repositories.Car
 {
     public class UpdateCarRepository : IUpdateCarRepository
     {
@@ -10,7 +10,7 @@ namespace Infraestructure.Repositories
         {
             _context = context;
         }
-        public async Task<bool> UpdateCarAsync(Guid id, Car car)
+        public async Task<bool> UpdateCarAsync(Guid id, Domain.Entities.Car car)
         {
             var existingCar = await _context.Cars.FindAsync(id);
             if (existingCar == null)
@@ -26,7 +26,7 @@ namespace Infraestructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
-        public async Task<Car?> GetCarByIdAsync(Guid id)
+        public async Task<Domain.Entities.Car?> GetCarByIdAsync(Guid id)
         {
             try
             {

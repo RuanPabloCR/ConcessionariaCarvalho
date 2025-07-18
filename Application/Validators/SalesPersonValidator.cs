@@ -1,10 +1,10 @@
-﻿using Domain.Entities;
+﻿using Application.Communication.SalesPerson;
 using FluentValidation;
 namespace Application.Validators
 {
-    public class SalesPersonValidator : AbstractValidator<SalesPerson>
+    public class SalesPersonRequestValidator : AbstractValidator<SalesPersonRequest>
     {
-        public SalesPersonValidator()
+        public SalesPersonRequestValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()

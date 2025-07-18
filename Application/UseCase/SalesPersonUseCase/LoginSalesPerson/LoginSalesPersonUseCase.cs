@@ -1,18 +1,15 @@
 using Application.Communication.SalesPerson;
 using Application.RepositoriesInterface;
 using Domain.Entities;
-using FluentValidation;
 
 namespace Application.UseCase.SalesPersonUseCase.LoginSalesPerson
 {
     public class LoginSalesPersonUseCase : ILoginSalesPersonUseCase
     {
         private readonly IRegisterSalesPersonRepository _repository;
-        private readonly IValidator<SalesPersonRequest> _validator;
-        public LoginSalesPersonUseCase(IRegisterSalesPersonRepository repository, IValidator<SalesPersonRequest> validator)
+        public LoginSalesPersonUseCase(IRegisterSalesPersonRepository repository)
         {
             _repository = repository;
-            _validator = validator;
         }
 
         public async Task<SalesPerson?> LoginAsync(SalesPersonRequest request)

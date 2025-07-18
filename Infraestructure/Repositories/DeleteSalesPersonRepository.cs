@@ -17,6 +17,7 @@ namespace Infraestructure.Repositories
             {
                 _context.SalesPeople.Remove(salesPerson);
                 await _context.SaveChangesAsync();
+           
             }
         }
     }

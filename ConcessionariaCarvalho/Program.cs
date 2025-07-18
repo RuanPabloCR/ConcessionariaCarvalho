@@ -39,14 +39,14 @@ namespace ConcessionariaCarvalho
                 options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
                 options.AddPolicy("SalesPersonPolicy", policy => policy.RequireRole("SalesPerson"));
                 options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
-                
+
             });
 
             // Adicionando a camada de Infraestrutura
-            builder.Services.AddInfrastructure();
-            
+            builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddApplication();
             builder.Services.AddControllers();
-           
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -54,7 +54,7 @@ namespace ConcessionariaCarvalho
 
             app.UseAuthentication();
             app.UseAuthorization();
-         
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

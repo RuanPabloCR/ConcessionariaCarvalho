@@ -1,11 +1,7 @@
 ﻿using Application.RepositoriesInterface;
 using Infraestructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 namespace Infraestructure.Repositories
 {
     public class RegisterSalesPersonRepository : IRegisterSalesPersonRepository
@@ -14,6 +10,15 @@ namespace Infraestructure.Repositories
         public RegisterSalesPersonRepository(AppDbContext context)
         {
             _context = context;
+        }
+        public async Task AddAsync(SalesPerson salesPerson)
+        {
+            _context.SalesPeople.Add(salesPerson);
+            await _context.SaveChangesAsync();
+        }
+        public async Task<SalesPerson?> GetByEmailAsync(string email)
+        {
+            return await _context.SalesPeople.FirstOrDefaultAsync(sp => sp.Email == email);
         }
     }
 }
