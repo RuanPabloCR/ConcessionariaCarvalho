@@ -3,7 +3,7 @@ using Domain.Entities;
 using Infraestructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infraestructure.Repositories
+namespace Infraestructure.Repositories.GuestR
 
 {
     public class RegisterGuestRepository : IRegisterGuestRepository

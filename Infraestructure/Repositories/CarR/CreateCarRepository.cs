@@ -2,7 +2,7 @@
 using Domain.Entities;
 using Infraestructure.Data;
 
-namespace Infraestructure.Repositories.Car
+namespace Infraestructure.Repositories.CarR
 {
     public class CreateCarRepository : ICreateCarRepository
     {

@@ -1,11 +1,11 @@
-﻿using Domain.Entities;
+﻿using Application.Communication.Guests;
 using FluentValidation;
 
 namespace Application.Validators
 {
-    public class GuestValidator : AbstractValidator<Guest>
+    public class GuestRequestValidator : AbstractValidator<GuestsRequest>
     {
-        public GuestValidator()
+        public GuestRequestValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()

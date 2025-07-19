@@ -24,7 +24,7 @@ namespace Application.UseCase.SalesPersonUseCase.RegisterSalesPerson
             var existingSalesPerson = await _repository.GetByEmailAsync(request.Email);
             if (existingSalesPerson != null)
             {
-                throw new InvalidOperationException("A sales person with this email already exists.");
+                throw new InvalidOperationException("Email already exists.");
             }
             var salesPerson = new SalesPerson
             {

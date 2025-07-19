@@ -7,8 +7,9 @@ using Application.UseCase.SalesPersonUseCase.RegisterSalesPerson;
 using Application.Validators;
 using FluentValidation;
 using Infraestructure.Data;
-using Infraestructure.Repositories;
-using Infraestructure.Repositories.Car;
+using Infraestructure.Repositories.CarR;
+using Infraestructure.Repositories.GuestR;
+using Infraestructure.Repositories.SalesPersonR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,7 +27,7 @@ namespace Infraestructure
             services.AddScoped<IRegisterSalesPersonRepository, RegisterSalesPersonRepository>();
             services.AddScoped<IDeleteSalesPersonRepository, DeleteSalesPersonRepository>();
 
-            services.AddValidatorsFromAssemblyContaining<GuestValidator>();
+            services.AddValidatorsFromAssemblyContaining<GuestRequestValidator>();
             services.AddValidatorsFromAssemblyContaining<SalesPersonRequestValidator>();
         }
 

@@ -1,7 +1,6 @@
 ﻿using Application.RepositoriesInterface;
 using Infraestructure.Data;
-using Domain.Entities;
-namespace Infraestructure.Repositories.Car
+namespace Infraestructure.Repositories.CarR
 {
     public class UpdateCarRepository : IUpdateCarRepository
     {

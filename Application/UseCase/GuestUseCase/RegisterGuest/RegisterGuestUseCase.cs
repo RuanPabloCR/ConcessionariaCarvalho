@@ -8,19 +8,24 @@ namespace Application.UseCase.GuestUseCase.RegisterGuest
 {
     public class RegisterGuestUseCase : IRegisterGuestUseCase
     {
-        private readonly IValidator<Guest> _validator;
+        private readonly IValidator<GuestsRequest> _validator;
         private readonly IRegisterGuestRepository _repository;
-        public RegisterGuestUseCase(IValidator<Guest> validator, IRegisterGuestRepository registerGuestRepository)
+        public RegisterGuestUseCase(IValidator<GuestsRequest> validator, IRegisterGuestRepository registerGuestRepository)
         {
             _validator = validator;
             _repository = registerGuestRepository;
         }
         public async Task<Guest> RegisterUserAsync(GuestsRequest guestsRequest)
         {
-            
+
+            var validationResult = await _validator.ValidateAsync(guestsRequest);
+            if (!validationResult.IsValid)
+                return null;
+
             var existing = await _repository.GetByEmailAsync(guestsRequest.Email);
             if (existing != null)
                 return null;
+
             var guest = new Guest
             {
                 Name = guestsRequest.Name,
@@ -30,11 +35,6 @@ namespace Application.UseCase.GuestUseCase.RegisterGuest
                 Password = BCrypt.Net.BCrypt.HashPassword(guestsRequest.Password)
             };
 
-            // Validação
-            var validationResult = await _validator.ValidateAsync(guest);
-            if (!validationResult.IsValid)
-                return null;
-            // salar o usuario no banco de dados
             await _repository.AddAsync(guest);
             return guest;
         }

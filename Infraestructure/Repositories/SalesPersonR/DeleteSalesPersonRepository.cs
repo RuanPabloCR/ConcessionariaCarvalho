@@ -1,7 +1,7 @@
 ﻿using Application.RepositoriesInterface;
 using Infraestructure.Data;
 
-namespace Infraestructure.Repositories
+namespace Infraestructure.Repositories.SalesPersonR
 {
     public class DeleteSalesPersonRepository : IDeleteSalesPersonRepository
     {

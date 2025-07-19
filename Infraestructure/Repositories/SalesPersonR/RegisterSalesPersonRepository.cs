@@ -2,7 +2,8 @@
 using Infraestructure.Data;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-namespace Infraestructure.Repositories
+
+namespace Infraestructure.Repositories.SalesPersonR
 {
     public class RegisterSalesPersonRepository : IRegisterSalesPersonRepository
     {
