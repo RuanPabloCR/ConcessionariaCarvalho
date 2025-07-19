@@ -1,5 +1,4 @@
 ﻿using Application.RepositoriesInterface;
-using Application.Validators;
 using FluentValidation;
 using Domain.Entities;
 using Application.Communication.Cars;
@@ -8,26 +7,20 @@ namespace Application.UseCase.CarUseCase.RegisterCar
     public class CreateCarUseCase : ICreateCarUseCase
     {
         private readonly ICreateCarRepository _createCarRepository;
-        private readonly IValidator<Car> _validator;
-        public  CreateCarUseCase(ICreateCarRepository createCarRepository, IValidator<Car> validator)
+        private readonly IValidator<CarRequest> _validator;
+        public  CreateCarUseCase(ICreateCarRepository createCarRepository, IValidator<CarRequest> validator)
         {
             _createCarRepository = createCarRepository;
             _validator = validator;
         }
         public async Task<Car> RegisterCarAsync(CarRequest request)
         {
-           var result = _validator.Validate(new Car
+            var validationResult = await _validator.ValidateAsync(request);
+            if (!validationResult.IsValid)
             {
-                Model = request.Model,
-                Brand = request.Brand,
-                Year = request.Year,
-                Price = request.Price,
-                Status = request.Status
-            });
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
+                throw new ValidationException(validationResult.Errors);
             }
+
             var car = new Car
             {
                 Id = Guid.NewGuid(),

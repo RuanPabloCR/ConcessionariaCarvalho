@@ -4,9 +4,9 @@ namespace Application.UseCase.SaleUseCase
 {
     public class RegisterSaleUseCase : IRegisterSaleUseCase
     {
-        private readonly IRegisterSale _registerSaleRepository;
+        private readonly ISalesRepository _registerSaleRepository;
 
-        public RegisterSaleUseCase(IRegisterSale registerSaleRepository)
+        public RegisterSaleUseCase(ISalesRepository registerSaleRepository)
         {
             _registerSaleRepository = registerSaleRepository;
         }

@@ -1,4 +1,6 @@
+using Application.RepositoriesInterface;
 using Infraestructure;
+using Infraestructure.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -41,7 +43,9 @@ namespace ConcessionariaCarvalho
                 options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
 
             });
-
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped<IUserContext, UserContext>();
+            builder.Services.AddScoped<TokenService>();
             // Adicionando a camada de Infraestrutura
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
