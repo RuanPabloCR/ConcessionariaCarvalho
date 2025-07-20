@@ -17,7 +17,7 @@ namespace Infraestructure.JWT
             if (user == null)
                 throw new InvalidOperationException("Usuário não autenticado.");
 
-            // Supondo que o SalesPersonId está na claim "sub" ou "id"
+
             var idClaim = user.FindFirst(ClaimTypes.NameIdentifier) ?? user.FindFirst("sub") ?? user.FindFirst("id");
             if (idClaim == null)
                 throw new InvalidOperationException("Claim de identificação não encontrada.");

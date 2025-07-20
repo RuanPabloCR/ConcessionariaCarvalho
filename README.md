@@ -2,7 +2,7 @@
 
 ## 1. Planejamento
 - Definição dos requisitos do sistema.
-- Estruturação das camadas do projeto: Domain, Application, Infraestructure e API.
+- Estruturação das camadas do projeto: Domain, Application, Infrastructure e API.
 
 ## 2. Modelagem
 - Criação das entidades de domínio na pasta `Domain/Entities`.
@@ -21,7 +21,7 @@
 ## 5. Implementação da API
 - Criação dos controllers na pasta `ConcessionariaCarvalho/Controllers`.
 - Configuração do Swagger para documentação da API.
-- Configuração de autenticação e autorização, se necessário.
+- Configuração de autenticação e autorização.
 ---
 
 ## Tecnologias Utilizadas
@@ -29,7 +29,16 @@
 - **.NET (versão 8.0)**: Framework principal para desenvolvimento da aplicação.
 - **Entity Framework Core**: ORM para acesso ao banco de dados.
 - **Swagger (Swashbuckle.AspNetCore)**: Documentação interativa da API.
-- **MySQL**: Banco de dados relacional.
+- **SQL Server**: Banco de dados relacional utilizado no desenvolvimento (configurado via Docker).
 - **FluentValidation**: Validação de dados.
+
 ---
+
+## Observações
+
+- O projeto ainda está em desenvolvimento e pode não funcionar completamente em todos os cenários.
+- O banco de dados utilizado é o **SQL Server**, configurado via Docker.  
+  A senha do usuário `sa` está definida como `Usuario@123` no arquivo `docker-compose.yml` e na string de conexão do `appsettings.Development.json`.
+
+- A string de conexão está localizada em `appsettings.Development.json`.
 

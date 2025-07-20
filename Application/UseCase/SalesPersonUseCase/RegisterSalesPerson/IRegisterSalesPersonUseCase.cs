@@ -1,4 +1,4 @@
-﻿using Application.Communication.SalesPerson;
+﻿using Application.Communication.SalesPeople;
 using Domain.Entities;
 
 namespace Application.UseCase.SalesPersonUseCase.RegisterSalesPerson

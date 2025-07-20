@@ -1,4 +1,4 @@
-namespace Application.Communication.SalesPerson
+namespace Application.Communication.SalesPeople
 {
     public class SalesPersonLoginRequest
     {

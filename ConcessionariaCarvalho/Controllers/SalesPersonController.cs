@@ -1,5 +1,5 @@
 ﻿using Application.Communication.Guests;
-using Application.Communication.SalesPerson;
+using Application.Communication.SalesPeople;
 using Application.UseCase.SalesPersonUseCase.DeleteSalesPerson;
 using Application.UseCase.SalesPersonUseCase.LoginSalesPerson;
 using Application.UseCase.SalesPersonUseCase.RegisterSalesPerson;

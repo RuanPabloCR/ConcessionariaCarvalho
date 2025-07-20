@@ -2,6 +2,7 @@
 using Infraestructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
+using Domain.Enums;
 namespace Infraestructure.Repositories.SaleR
 {
     public class SalesRepository : ISalesRepository
@@ -54,7 +55,7 @@ namespace Infraestructure.Repositories.SaleR
                     return false;
 
 
-                if (car.Status != Domain.Enums.CarStatus.Available)
+                if (car.Status !=CarStatus.Available)
                     return false;
 
                 var sale = new Sale
@@ -68,14 +69,14 @@ namespace Infraestructure.Repositories.SaleR
                 };
                 _context.SalesProducts.Add(sale);
 
-                car.Status = Domain.Enums.CarStatus.Sold;
+                car.Status = CarStatus.Sold;
                 _context.Cars.Update(car);
 
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await transaction.RollbackAsync();
                 return false;

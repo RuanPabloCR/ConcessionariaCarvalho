@@ -18,7 +18,9 @@ namespace Infraestructure.Data
             modelBuilder.Entity<Car>()
                 .Property(c => c.Price)
                 .HasPrecision(18, 2);
-
+            modelBuilder.Entity<Guest>()
+                .Property(c => c.Balance)
+                .HasPrecision(18, 2);
             modelBuilder.Entity<Sale>()
                 .Property(s => s.Price)
                 .HasPrecision(18, 2);

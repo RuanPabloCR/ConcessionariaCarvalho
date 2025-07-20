@@ -26,5 +26,3 @@
 - Implementar logs e monitoramento.
 - Revisar regras de negócio e fluxos críticos.
 ---
-
-> **Observação:** Priorize a integração da IA e o desenvolvimento do FrontEnd, pois são os próximos grandes marcos do projeto.

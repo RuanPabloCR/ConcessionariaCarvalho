@@ -1,4 +1,4 @@
-﻿using Application.Communication.SalesPerson;
+﻿using Application.Communication.SalesPeople;
 using Application.RepositoriesInterface;
 using Domain.Entities;
 using FluentValidation;

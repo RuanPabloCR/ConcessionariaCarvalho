@@ -1,9 +1,9 @@
-﻿using Domain.Entities;
+﻿using Application.Communication.Sales;
 
 namespace Application.UseCase.SaleUseCase.GetSale
 {
     public interface IGetSaleUseCase
     {
-        Task<IEnumerable<Sale>> ExecuteAsync();
+        Task<IEnumerable<SalesResponse>> ExecuteAsync();
     }
 }

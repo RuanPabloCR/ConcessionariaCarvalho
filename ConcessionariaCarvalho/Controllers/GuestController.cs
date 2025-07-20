@@ -3,7 +3,6 @@ using Application.Communication.Guests;
 using Application.UseCase.GuestUseCase.RegisterGuest;
 using Application.UseCase.GuestUseCase.LoginGuest;
 using Infraestructure.JWT;
-using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Application.RepositoriesInterface;
 

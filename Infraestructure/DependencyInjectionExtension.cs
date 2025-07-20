@@ -1,4 +1,5 @@
 ﻿using Application.RepositoriesInterface;
+using Application.UseCase.CarUseCase.GetCar;
 using Application.UseCase.CarUseCase.RegisterCar;
 using Application.UseCase.CarUseCase.UpdateCar;
 using Application.UseCase.GuestUseCase.DeleteGuest;
@@ -33,6 +34,7 @@ namespace Infraestructure
             services.AddScoped<IRegisterSalesPersonRepository, RegisterSalesPersonRepository>();
             services.AddScoped<IDeleteSalesPersonRepository, DeleteSalesPersonRepository>();
             services.AddScoped<ISalesRepository, SalesRepository>();
+            services.AddScoped<IGetCarRepository, GetCarRepository>();
 
             services.AddValidatorsFromAssemblyContaining<GuestRequestValidator>();
             services.AddValidatorsFromAssemblyContaining<SalesPersonRequestValidator>();
@@ -41,17 +43,23 @@ namespace Infraestructure
 
         public static void AddApplication(this IServiceCollection services)
         {
+            // guests
             services.AddScoped<IRegisterGuestUseCase, RegisterGuestUseCase>();
             services.AddScoped<ILoginGuestUseCase, LoginGuestUseCase>();
+            services.AddScoped<IDeleteGuestUseCase, DeleteGuestUseCase>();
+            // sales persons
             services.AddScoped<IRegisterSalesPersonUseCase, RegisterSalesPersonUseCase>();
             services.AddScoped<ILoginSalesPersonUseCase, LoginSalesPersonUseCase>();
             services.AddScoped<IDeleteSalesPersonUseCase, DeleteSalesPersonUseCase>();
-            services.AddScoped<IDeleteGuestUseCase, DeleteGuestUseCase>();
-            services.AddScoped<ICreateCarUseCase, CreateCarUseCase>();
-            services.AddScoped<IUpdateCarUseCase, UpdateCarUseCase>();
+            // sales
             services.AddScoped<IRegisterSaleUseCase, RegisterSaleUseCase>();
             services.AddScoped<IGetSaleUseCase, GetSaleUseCase>();
             services.AddScoped<IGetSalesByDateUseCase, GetSalesByDateUseCase>();
+
+            // cars
+            services.AddScoped<IGetCarUseCase, GetCarUseCase>();
+            services.AddScoped<ICreateCarUseCase, CreateCarUseCase>();
+            services.AddScoped<IUpdateCarUseCase, UpdateCarUseCase>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
