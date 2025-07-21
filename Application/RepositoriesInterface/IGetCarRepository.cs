@@ -6,5 +6,6 @@ namespace Application.RepositoriesInterface
         Task<IEnumerable<Car>> GetAllCarsAsync();
         Task<IEnumerable<Car>> GetCarsByDateAsync(DateOnly data);
         Task<IEnumerable<Car>> SearchAsync(String searchTerm);
+        Task<Car?> GetCarByIdAsync(Guid id);
     }
 }

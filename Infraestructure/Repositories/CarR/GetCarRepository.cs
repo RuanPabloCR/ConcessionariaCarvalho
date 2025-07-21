@@ -33,4 +33,8 @@ public class GetCarRepository : IGetCarRepository
             .Where(c => c.CreatedAt == date)
             .ToListAsync();
     }
+    public async Task<Car?> GetCarByIdAsync(Guid id)
+    {
+        return await _context.Cars.FindAsync(id);
+    }
 }

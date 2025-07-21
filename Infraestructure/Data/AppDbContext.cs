@@ -18,12 +18,30 @@ namespace Infraestructure.Data
             modelBuilder.Entity<Car>()
                 .Property(c => c.Price)
                 .HasPrecision(18, 2);
+
             modelBuilder.Entity<Guest>()
                 .Property(c => c.Balance)
                 .HasPrecision(18, 2);
+
             modelBuilder.Entity<Sale>()
                 .Property(s => s.Price)
                 .HasPrecision(18, 2);
+
+            // Índices únicos para Guest
+            modelBuilder.Entity<Guest>()
+                .HasIndex(g => g.Cpf)
+                .IsUnique();
+            modelBuilder.Entity<Guest>()
+                .HasIndex(g => g.Email)
+                .IsUnique();
+
+            // Índices únicos para SalesPerson
+            modelBuilder.Entity<SalesPerson>()
+                .HasIndex(s => s.Cpf)
+                .IsUnique();
+            modelBuilder.Entity<SalesPerson>()
+                .HasIndex(s => s.Email)
+                .IsUnique();
 
             base.OnModelCreating(modelBuilder);
         }

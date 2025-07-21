@@ -58,6 +58,9 @@ namespace Infraestructure.Repositories.SaleR
                 if (car.Status !=CarStatus.Available)
                     return false;
 
+                guest.Balance -= price;
+                _context.Guests.Update(guest);
+
                 var sale = new Sale
                 {
                     Id = Guid.NewGuid(),

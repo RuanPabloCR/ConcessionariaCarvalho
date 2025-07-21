@@ -46,6 +46,7 @@ namespace ConcessionariaCarvalho.Controllers
             }
             return Ok(sales);
         }
+        /*
         [HttpPost("register")]
         [Authorize(Roles = "Admin, SalesPerson")]
         public async Task<IActionResult> RegisterSale([FromBody] SalesRequest request)
@@ -62,5 +63,6 @@ namespace ConcessionariaCarvalho.Controllers
             }
             return Ok("Sale registered successfully.");
         }
+        */
     }
 }
