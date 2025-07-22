@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestructure", "Infraest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{8DACEB27-53CD-4601-A092-E512F13DB18D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TESTS", "TESTS\TESTS.csproj", "{53765179-7E01-4E77-96D3-5CB66A1E1417}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,8 +35,15 @@ Global
 		{8DACEB27-53CD-4601-A092-E512F13DB18D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DACEB27-53CD-4601-A092-E512F13DB18D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DACEB27-53CD-4601-A092-E512F13DB18D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53765179-7E01-4E77-96D3-5CB66A1E1417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53765179-7E01-4E77-96D3-5CB66A1E1417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53765179-7E01-4E77-96D3-5CB66A1E1417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53765179-7E01-4E77-96D3-5CB66A1E1417}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {831AC8AF-0074-4CBB-9DB0-214515490D32}
 	EndGlobalSection
 EndGlobal

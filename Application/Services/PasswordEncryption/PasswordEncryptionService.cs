@@ -2,14 +2,14 @@
 {
     public class PasswordEncryptionService : IPasswordEncryptionService
     {
-        private readonly int _workFactor = 12;
-        public PasswordEncryptionService(int workFactor)
+        private readonly int _workFactor;
+        public PasswordEncryptionService(int workFactor = 12)
         {
             _workFactor = workFactor;
         }
         public string HashPassword(string password)
         {
-            if(string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(password))
             {
                 throw new ArgumentException("Password cannot be null or empty", nameof(password));
             }
@@ -21,7 +21,7 @@
         }
         public bool VerifyPassword(string password, string hashedPassword)
         {
-            if(string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
             {
                 return false;
             }

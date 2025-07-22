@@ -2,6 +2,7 @@
 using Application.UseCase.CarUseCase.GetCar;
 using Application.UseCase.CarUseCase.RegisterCar;
 using Application.UseCase.CarUseCase.UpdateCar;
+using Application.UseCase.SaleUseCase;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -15,12 +16,15 @@ namespace ConcessionariaCarvalho.Controllers
         private readonly ICreateCarUseCase _createCarUseCase;
         private readonly IUpdateCarUseCase _updateCarUseCase;
         private readonly IGetCarUseCase _getCarUseCase;
-
-        public CarController(ICreateCarUseCase createCarUseCase, IUpdateCarUseCase updateCarUseCase, IGetCarUseCase getCarUseCase)
+        private readonly IBuyCarUseCase _buyCarUseCase;
+        public CarController(ICreateCarUseCase createCarUseCase, IUpdateCarUseCase updateCarUseCase,
+            IGetCarUseCase getCarUseCase,
+            IBuyCarUseCase buyCarUseCase)
         {
             _createCarUseCase = createCarUseCase;
             _updateCarUseCase = updateCarUseCase;
             _getCarUseCase = getCarUseCase;
+            _buyCarUseCase = buyCarUseCase;
         }
 
         [HttpPost("register")]
@@ -185,6 +189,29 @@ namespace ConcessionariaCarvalho.Controllers
             catch (Exception)
             {
                 return StatusCode(500, "Internal server error.");
+            }
+        }
+
+        [HttpPost("buy/{carId:guid}")]
+        [Authorize(Roles = "Guest")]
+        public async Task<IActionResult> BuyCar([FromRoute] Guid carId)
+        {
+            if (carId == Guid.Empty)
+            {
+                return BadRequest("Invalid car ID.");
+            }
+            try
+            {
+                var result = await _buyCarUseCase.ExecuteAsync(carId);
+                if (!result)
+                {
+                    return BadRequest("Car purchase failed. Please check the car availability or your account status.");
+                }
+                return Ok("Car purchased successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
     }

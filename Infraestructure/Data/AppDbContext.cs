@@ -12,6 +12,7 @@ namespace Infraestructure.Data
         public DbSet<Guest> Guests { get; set; }
         public DbSet<SalesPerson> SalesPeople { get; set; }
         public DbSet<Sale> SalesProducts { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

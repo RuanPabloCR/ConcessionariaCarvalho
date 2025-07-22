@@ -26,13 +26,13 @@ namespace Application.UseCase.SaleUseCase
             _carPurschaseService = carPurschase;
         }
 
-        public async Task<bool> ExecuteAsync(Guid carId, Guid salesPersonId)
+        public async Task<bool> ExecuteAsync(Guid carId)
         {
             var guestId = _userContext.GetUserId();
             var car = await _getCarRepository.GetCarByIdAsync(carId);
             var guest = await _getGuestRepository.GetGuestByIdAsync(guestId);
+            var salesPerson = await _getSalesPersonRepository.GetSalesPersonByIdAsync(car.SalesPersonId);
 
-            var salesPerson = await _getSalesPersonRepository.GetSalesPersonByIdAsync(salesPersonId);
             if (salesPerson == null)
                 return false;
 
@@ -40,7 +40,7 @@ namespace Application.UseCase.SaleUseCase
             if (!validateResult)
                 return false;
 
-            var result = await _registerSaleUseCase.ExecuteAsync(carId, guestId ,salesPersonId, car.Price);
+            var result = await _registerSaleUseCase.ExecuteAsync(carId, guestId ,car.SalesPersonId, car.Price);
             return result;
         }
     }

@@ -13,6 +13,7 @@ namespace Domain.Entities
         public decimal Price { get; set; }
         public CarStatus Status { get; set; }
         public DateOnly CreatedAt { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
+        public Guid SalesPersonId { get; set; }
 
     }
 }

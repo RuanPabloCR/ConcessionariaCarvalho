@@ -1,0 +1,67 @@
+### Variáveis
+@baseUrl = https://localhost:7157
+@email = teste@exemplo.com
+@password = 123456
+
+### 0. Login Admin (para obter token de admin)
+POST {{baseUrl}}/api/adminauth/login
+Content-Type: application/json
+
+{
+  "email": "Admin@gmail.com",
+  "password": "Admin123"
+}
+
+### 1. Register Guest
+POST {{baseUrl}}/api/guest/register
+Content-Type: application/json
+
+{
+  "name": "João Teste",
+  "email": "{{email}}",
+  "password": "{{password}}",
+  "phone": "11999999999",
+  "cpf": "123.456.789-01"
+}
+
+### 2. Login Guest
+POST {{baseUrl}}/api/guest/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+
+### 4. Get Profile (Cole o token do login acima)
+GET {{baseUrl}}/api/guest/profile
+Authorization: Bearer COLE_O_TOKEN
+
+### 5. Registrar SalesPerson (Cole o token do admin acima)
+POST {{baseUrl}}/api/salesperson/register
+Content-Type: application/json
+Authorization: Bearer COLE_O_TOKEN
+
+{
+  "name": "Vendedor Teste",
+  "email": "vendedor@exemplo.com",
+  "password": "123456",
+  "phone": "11999999999",
+  "cpf": "123.456.789-01"
+}
+
+### 6. Login SalesPerson
+POST {{baseUrl}}/api/salesperson/login
+Content-Type: application/json
+
+{
+  "email": "vendedor@exemplo.com",
+  "password": "123456",
+  "phone": "11999999999",
+  "cpf": "123.456.789-01"
+}
+
+### 7. Profile SalesPerson
+GET {{baseUrl}}/api/salesperson/profile
+Authorization: Bearer COLE_O_TOKEN

@@ -2,6 +2,6 @@ namespace Application.UseCase.SaleUseCase
 {
     public interface IBuyCarUseCase
     {
-        Task<bool> ExecuteAsync(Guid carId, Guid salesPersonId);
+        Task<bool> ExecuteAsync(Guid carId);
     }
 }

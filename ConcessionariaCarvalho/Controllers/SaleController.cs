@@ -46,23 +46,5 @@ namespace ConcessionariaCarvalho.Controllers
             }
             return Ok(sales);
         }
-        /*
-        [HttpPost("register")]
-        [Authorize(Roles = "Admin, SalesPerson")]
-        public async Task<IActionResult> RegisterSale([FromBody] SalesRequest request)
-        {
-            if (request == null || request.CarId == Guid.Empty || request.GuestId == Guid.Empty ||
-                request.SalesPersonId == Guid.Empty || request.Price <= 0)
-            {
-                return BadRequest("Invalid sale data provided.");
-            }
-            var result = await _registerSaleUseCase.ExecuteAsync(request.CarId, request.GuestId, request.SalesPersonId, request.Price);
-            if (!result)
-            {
-                return StatusCode(500, "An error occurred while registering the sale.");
-            }
-            return Ok("Sale registered successfully.");
-        }
-        */
     }
 }

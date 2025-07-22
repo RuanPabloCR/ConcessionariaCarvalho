@@ -1,11 +1,12 @@
-﻿using Application.Communication.Guests;
-using Application.Communication.SalesPeople;
+﻿using Application.Communication.SalesPeople;
 using Application.UseCase.SalesPersonUseCase.DeleteSalesPerson;
 using Application.UseCase.SalesPersonUseCase.LoginSalesPerson;
 using Application.UseCase.SalesPersonUseCase.RegisterSalesPerson;
 using Infraestructure.JWT;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Application.RepositoriesInterface;
+using System.Security.Claims;
 
 namespace ConcessionariaCarvalho.Controllers
 {
@@ -17,13 +18,22 @@ namespace ConcessionariaCarvalho.Controllers
         private readonly ILoginSalesPersonUseCase _loginSalesPersonUseCase;
         private readonly IDeleteSalesPersonUseCase _deleteSalesPersonUseCase;
         private readonly TokenService _tokenService;
-        public SalesPersonController(IRegisterSalesPersonUseCase registerSalesPersonUseCase, ILoginSalesPersonUseCase loginSalesPersonUseCase,
-            IDeleteSalesPersonUseCase deleteSalesPersonUseCase, TokenService tokenService)
+        private readonly IGetSalesPersonRepository _getSalesPersonRepository;
+        private readonly IUserContext _userContext;
+        public SalesPersonController(
+            IRegisterSalesPersonUseCase registerSalesPersonUseCase,
+            ILoginSalesPersonUseCase loginSalesPersonUseCase,
+            IDeleteSalesPersonUseCase deleteSalesPersonUseCase,
+            TokenService tokenService,
+            IGetSalesPersonRepository getSalesPersonRepository,
+            IUserContext userContext)
         {
-            this._registerSalesPersonUseCase = registerSalesPersonUseCase;
-            this._loginSalesPersonUseCase = loginSalesPersonUseCase;
-            this._deleteSalesPersonUseCase = deleteSalesPersonUseCase;
-            this._tokenService = tokenService;
+            _registerSalesPersonUseCase = registerSalesPersonUseCase;
+            _loginSalesPersonUseCase = loginSalesPersonUseCase;
+            _deleteSalesPersonUseCase = deleteSalesPersonUseCase;
+            _tokenService = tokenService;
+            _getSalesPersonRepository = getSalesPersonRepository;
+            _userContext = userContext;
         }
 
         [HttpPost("register")]
@@ -46,20 +56,20 @@ namespace ConcessionariaCarvalho.Controllers
             {
                 return BadRequest("Invalid ID.");
             }
-            //Alterar a interface pro método ser do tipo bool
+
             await _deleteSalesPersonUseCase.DeleteSalesPersonAsync(salesPersonId);
             return NoContent();
         }
-        [HttpPost("salesPersonlogin")]
-        public async Task<ActionResult<SalesPersonWToken>> Login([FromBody] SalesPersonRequest request)
+        [HttpPost("login")]
+        public async Task<ActionResult<SalesPersonResponseWToken>> Login([FromBody] SalesPersonRequest request)
         {
             var salesPerson = await _loginSalesPersonUseCase.LoginAsync(request);
             if (salesPerson == null)
                 return Unauthorized("Invalid information");
 
             var token = _tokenService.Generate(salesPerson);
-            // tenho que verificar se falta atributos no SalesPersonWToken
-            var response = new SalesPersonWToken
+
+            var response = new SalesPersonResponseWToken
             {
                 Name = salesPerson.Name,
                 Email = salesPerson.Email,
@@ -68,6 +78,32 @@ namespace ConcessionariaCarvalho.Controllers
                 Token = token
             };
             return Ok(response);
+        }
+
+        [HttpGet("profile")]
+        [Authorize(Roles = "SalesPerson")]
+        public async Task<ActionResult<SalesPersonResponse>> GetProfile()
+        {
+            try
+            {
+                var salesPersonId = _userContext.GetUserId();
+                var salesPerson = await _getSalesPersonRepository.GetSalesPersonByIdAsync(salesPersonId);
+                if (salesPerson == null)
+                    return NotFound("SalesPerson not found.");
+
+                var response = new SalesPersonResponse
+                {
+                    Name = salesPerson.Name,
+                    Email = salesPerson.Email,
+                    Phone = salesPerson.Phone,
+                    Cpf = salesPerson.Cpf
+                };
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
         }
     }
 }

@@ -30,7 +30,9 @@ namespace Application.UseCase.SalesPersonUseCase.RegisterSalesPerson
             {
                 Name = request.Name,
                 Email = request.Email,
-                Password = BCrypt.Net.BCrypt.HashPassword(request.Password)
+                Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
+                Phone = request.Phone,
+                Cpf = request.Cpf
             };
             await _repository.AddAsync(salesPerson);
             return salesPerson;

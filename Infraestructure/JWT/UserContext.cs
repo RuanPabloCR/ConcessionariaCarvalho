@@ -15,14 +15,22 @@ namespace Infraestructure.JWT
         {
             var user = _httpContextAccessor.HttpContext?.User;
             if (user == null)
-                throw new InvalidOperationException("Usuário não autenticado.");
+                throw new InvalidOperationException("User not authenticated.");
 
-
-            var idClaim = user.FindFirst(ClaimTypes.NameIdentifier) ?? user.FindFirst("sub") ?? user.FindFirst("id");
+            var idClaim = user.FindFirst(ClaimTypes.NameIdentifier);
             if (idClaim == null)
-                throw new InvalidOperationException("Claim de identificação não encontrada.");
+                throw new InvalidOperationException("Identification claim not found.");
 
-            return Guid.Parse(idClaim.Value);
+            // so pra verificar se é o Admin!!
+            if (idClaim.Value.Contains("@") && idClaim.Value == "Admin@gmail.com")
+            {
+                return Guid.Parse("00000000-0000-0000-0000-000000000001");
+            }
+
+            if (!Guid.TryParse(idClaim.Value, out var userId))
+                throw new InvalidOperationException("Invalid user ID.");
+
+            return userId;
         }
     }
 }

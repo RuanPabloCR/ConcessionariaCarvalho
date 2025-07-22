@@ -8,10 +8,13 @@ namespace Application.UseCase.CarUseCase.RegisterCar
     {
         private readonly ICreateCarRepository _createCarRepository;
         private readonly IValidator<CarRequest> _validator;
-        public  CreateCarUseCase(ICreateCarRepository createCarRepository, IValidator<CarRequest> validator)
+        private readonly IUserContext _userContext;
+        public  CreateCarUseCase(ICreateCarRepository createCarRepository, IValidator<CarRequest> validator,
+            IUserContext userContext)
         {
             _createCarRepository = createCarRepository;
             _validator = validator;
+            _userContext = userContext;
         }
         public async Task<Car> RegisterCarAsync(CarRequest request)
         {
@@ -20,7 +23,7 @@ namespace Application.UseCase.CarUseCase.RegisterCar
             {
                 throw new ValidationException(validationResult.Errors);
             }
-
+            var userId = _userContext.GetUserId();
             var car = new Car
             {
                 Id = Guid.NewGuid(),
@@ -28,7 +31,8 @@ namespace Application.UseCase.CarUseCase.RegisterCar
                 Brand = request.Brand,
                 Year = request.Year,
                 Price = request.Price,
-                Status = request.Status
+                Status = request.Status,
+                SalesPersonId = userId,
             };
             await _createCarRepository.RegisterCarAsync(car);
             return car;

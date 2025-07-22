@@ -1,6 +1,7 @@
 using Application.RepositoriesInterface;
 using Infraestructure;
 using Infraestructure.JWT;
+using Infraestructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -41,6 +42,7 @@ namespace ConcessionariaCarvalho
                 options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
                 options.AddPolicy("SalesPersonPolicy", policy => policy.RequireRole("SalesPerson"));
                 options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
+                options.AddPolicy("GuestPolicy", policy => policy.RequireRole("Guest"));
 
             });
             builder.Services.AddHttpContextAccessor();
@@ -55,6 +57,11 @@ namespace ConcessionariaCarvalho
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+
+            // Seed do admin e carros, somente pra testar a aplicacao
+            app.Services.SeedAdmin();
+            app.Services.SeedCars();
 
             app.UseAuthentication();
             app.UseAuthorization();

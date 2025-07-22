@@ -1,5 +1,41 @@
 # Processo de Desenvolvimento
 
+## Como rodar o projeto
+
+1. **Baixar as dependências**
+
+   No diretório raiz do projeto, execute:
+   ```bash
+   dotnet restore
+   ```
+
+2. **Aplicar as migrations e criar o banco de dados**
+
+   No diretório do projeto da API (`ConcessionariaCarvalho/`), execute:
+   ```bash
+   dotnet ef database update
+   ```
+   > Se necessário, instale a ferramenta do Entity Framework:
+   > ```bash
+   > dotnet tool install --global dotnet-ef
+   > ```
+
+3. **Rodar a aplicação**
+
+   No diretório do projeto da API (`ConcessionariaCarvalho/`), execute:
+   ```bash
+   dotnet run
+   ```
+
+4. **Rodar via Docker (opcional para o banco de dados)**
+
+   Para subir o SQL Server via Docker:
+   ```bash
+   docker-compose up -d
+   ```
+
+---
+
 ## 1. Planejamento
 - Definição dos requisitos do sistema.
 - Estruturação das camadas do projeto: Domain, Application, Infrastructure e API.
